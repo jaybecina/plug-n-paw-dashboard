@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\LeadStatus;
+use App\Models\Clinic;
 use App\Models\ClinicLead;
 use App\Models\Supporter;
 use App\Models\User;
@@ -69,3 +70,14 @@ it('filters leads by status', function () {
 it('forbids non-admins on every analytics page', function (string $route) {
     $this->actingAs(User::factory()->create())->get(route($route))->assertForbidden();
 })->with(['dashboard', 'traffic', 'searches', 'leads.index', 'clinics', 'supporters']);
+
+it('finds leads by a clinic name containing underscores', function () {
+    $clinic = Clinic::factory()->create(['name' => 'Paws_Plus Clinic']);
+    ClinicLead::factory()->for($clinic)->create();
+    ClinicLead::factory()->count(2)->create();
+
+    $this->get(route('leads.index', ['clinic' => 'paws_plus']))->assertInertia(fn (Assert $page) => $page
+        ->has('leads.data', 1)
+        ->where('leads.data.0.clinic', 'Paws_Plus Clinic')
+    );
+});

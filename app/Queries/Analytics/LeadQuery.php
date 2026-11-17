@@ -47,7 +47,11 @@ final class LeadQuery
             ->whereBetween('occurred_at', $range->bounds())
             ->when($filters->status, fn (Builder $query, LeadStatus $status) => $query->where('status', $status))
             ->when($filters->action, fn (Builder $query, LeadAction $action) => $query->where('action', $action))
-            ->when($filters->clinic, fn (Builder $query, string $clinic) => $query->whereRelation('clinic', 'name', 'like', '%'.addcslashes($clinic, '%_\\').'%'))
+            ->when($filters->clinic, fn (Builder $query, string $clinic) => $query->whereHas(
+                'clinic',
+                // Match % and _ literally: SQLite LIKE needs an explicit ESCAPE.
+                fn (Builder $clinics) => $clinics->whereRaw("name like ? escape '\\'", ['%'.addcslashes($clinic, '%_\\').'%']),
+            ))
             ->latest('occurred_at')
             ->latest('id');
     }
