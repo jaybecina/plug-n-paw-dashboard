@@ -15,6 +15,8 @@ Route::middleware(['auth', 'verified', 'can:view-analytics'])->group(function ()
     Route::get('traffic', TrafficController::class)->name('traffic');
     Route::get('searches', SearchController::class)->name('searches');
     Route::get('leads', [LeadController::class, 'index'])->name('leads.index');
+    Route::get('leads/export', [LeadController::class, 'export'])->name('leads.export');
+    Route::patch('leads/{lead}', [LeadController::class, 'update'])->name('leads.update');
     Route::get('clinics', ClinicController::class)->name('clinics');
     Route::get('supporters', SupporterController::class)->name('supporters');
 });
