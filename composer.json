@@ -1,11 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/vue-starter-kit",
+    "name": "jaybecina/plug-n-paw-dashboard",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Analytics admin dashboard for the Plug N Paw vet finder (Laravel, Inertia, Vue, SQLite).",
     "keywords": [
         "laravel",
-        "framework"
+        "inertia",
+        "vue",
+        "sqlite",
+        "dashboard"
     ],
     "license": "MIT",
     "require": {

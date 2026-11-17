@@ -5,6 +5,8 @@
 defineProps<{
     rank: number;
     highlight?: boolean;
+    /** Light pins for use on the pine-teal panel. */
+    inverse?: boolean;
 }>();
 </script>
 
@@ -15,7 +17,9 @@ defineProps<{
         :class="
             highlight
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-pine text-pine-foreground'
+                : inverse
+                  ? 'bg-pine-foreground text-pine'
+                  : 'bg-pine text-pine-foreground'
         "
     >
         <span class="-rotate-45 font-heading text-xs font-semibold">{{
