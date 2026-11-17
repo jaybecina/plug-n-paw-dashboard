@@ -43,9 +43,9 @@ defineProps<{
     >
         <p class="font-medium">This is a live demo</p>
         <p class="mt-1 text-accent-foreground/80">
-            The admin login is filled in for you. Data resets on every
-            restart, and the first load can take about 30 seconds while the
-            free server wakes up.
+            The admin login is filled in for you. Data resets on every restart,
+            and the first load can take about 30 seconds while the free server
+            wakes up.
         </p>
         <dl class="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
             <dt class="text-accent-foreground/70">Email</dt>

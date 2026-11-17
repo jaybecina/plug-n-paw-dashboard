@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, FolderGit2, LayoutGrid } from '@lucide/vue';
+import {
+    Coffee,
+    FolderGit2,
+    Globe,
+    LayoutDashboard,
+    MapPinned,
+    Search,
+    Stethoscope,
+    TrendingUp,
+} from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -14,27 +23,29 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { clinics, dashboard, searches, supporters, traffic } from '@/routes';
+import leads from '@/routes/leads';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
+    { title: 'Overview', href: dashboard(), icon: LayoutDashboard },
+    { title: 'Traffic', href: traffic(), icon: TrendingUp },
+    { title: 'Vet searches', href: searches(), icon: Search },
+    { title: 'Clinic leads', href: leads.index(), icon: MapPinned },
+    { title: 'Clinics', href: clinics(), icon: Stethoscope },
+    { title: 'Supporters', href: supporters(), icon: Coffee },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: FolderGit2,
+        title: 'Live website',
+        href: 'https://plug-n-paw-web.vercel.app',
+        icon: Globe,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
+        title: 'Source code',
+        href: 'https://github.com/jaybecina/plug-n-paw-dashboard',
+        icon: FolderGit2,
     },
 ];
 </script>

@@ -34,6 +34,7 @@
 ### Task 1: Domain schema, enums, models, factories, deterministic seeders, `demo:seed`
 
 **Files:**
+
 - Create: `app/Enums/{TrafficSource,Device,SearchType,SearchStatus,LeadAction,LeadStatus}.php`
 - Create: `app/Models/{Visit,VetSearch,Clinic,ClinicLead,Supporter}.php`
 - Create: migrations for `is_admin` on users, `visits`, `clinics`, `vet_searches`, `clinic_leads`, `supporters`
@@ -43,6 +44,7 @@
 - Test: `tests/Feature/DemoSeedCommandTest.php`
 
 **Interfaces:**
+
 - Produces: enums are string-backed with `label(): string`; `SearchStatus::isSuccess(): bool` (true for `ok`, `no_results`). Models cast enum columns and `*_at` datetimes. Relations: `Visit hasMany VetSearch`, `VetSearch belongsTo Visit`, `VetSearch hasMany ClinicLead`, `Clinic hasMany ClinicLead`, `ClinicLead belongsTo Clinic|VetSearch`. `User::$is_admin` bool cast. `config('demo.enabled')`, `config('demo.admin.email')`, `config('demo.admin.password')`.
 
 - [ ] Write `DemoSeedCommandTest`: `demo:seed --force` exits 0; admin exists, `is_admin` true, verified; `visits` count > 10 000; `clinic_leads` > 0; every `visits.started_at` within last 180 days; running twice yields identical counts and identical first `vet_searches.query`.
@@ -54,6 +56,7 @@
 ### Task 2: Admin-only auth, sign-up off, demo mode
 
 **Files:**
+
 - Modify: `config/fortify.php` (remove registration), `FortifyServiceProvider` (drop register view/action), `AppServiceProvider` (Gate `view-analytics`), `bootstrap/app.php` (trust proxies, `demo` middleware alias), `routes/settings.php`
 - Delete: `pages/auth/Register.vue`, `Actions/Fortify/CreateNewUser.php`, `tests/Feature/Auth/RegistrationTest.php`
 - Create: `app/Http/Middleware/PreventDemoChanges.php`
@@ -77,12 +80,14 @@
 ### Task 4: Analytics queries + controllers + routes
 
 **Files:**
+
 - Create: `app/Queries/Analytics/{OverviewQuery,TrafficQuery,SearchQuery,LeadQuery,ClinicQuery,SupporterQuery}.php`
 - Create: `app/Http/Requests/AnalyticsRequest.php` (`range()` → `DateRange`, invalid → default 30d), `app/Http/Controllers/{Dashboard,Traffic,Search,Lead,Clinic,Supporter}Controller.php`
 - Modify: `routes/web.php`
 - Test: `tests/Feature/Analytics/*PageTest.php`, `tests/Unit/TrafficQueryTest.php`
 
 **Interfaces:** Each query `__invoke(DateRange $range): array` (or `run(...)`). Page props (all include `range: '7d'|'30d'|'90d'`):
+
 - Overview: `kpis: list<{key,label,value,previous,delta,format}>`, `daily: list<{date,visits,searches,leads}>`, `sources: list<{key,label,value}>`, `topClinics`, `recentLeads`.
 - Traffic: `kpis`, `daily`, `sources`, `devices`, `countries: list<{code,value}>`, `landingPages`.
 - Searches: `kpis`, `daily: list<{date, ok, no_results, failed}>`, `topQueries`, `searches` (paginator), `filters`.

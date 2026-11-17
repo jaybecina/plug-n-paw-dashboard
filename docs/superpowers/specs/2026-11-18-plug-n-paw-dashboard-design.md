@@ -14,6 +14,7 @@ tests, static analysis, CI, honest README.
 ## 2. Goals / non-goals / anti-goals
 
 Goals
+
 - Laravel 13 + Inertia 3 + Vue 3 (TypeScript) on the official Vue starter kit.
 - SQLite only.
 - Login, forgot password, seeded admin account; sign-up disabled.
@@ -24,22 +25,24 @@ Goals
 - README a stranger can follow.
 
 Non-goals
+
 - No real ingestion from the live site (data is seeded, labelled as demo).
 - No AI-triage leads (that feature is not live on the site).
 - No multi-tenant, roles beyond admin, or queues/workers.
 
 Anti-goals
+
 - Committing the `.sqlite` file or `.env`.
 - Data that looks fake (uniform noise, impossible ratios, stale dates).
 - A dashboard that looks like the untouched starter kit.
 
 ## 3. Approaches considered
 
-| Approach | Trade-off | Verdict |
-|---|---|---|
-| Render free, Docker | Real server, writes work; sleeps after ~15 min idle | **Picked** |
-| Vercel + `vercel-php` | Free, but read-only disk, SQLite writes and sessions flaky | Rejected |
-| Laravel Cloud | Best Laravel fit, but paid after a 14-day credit | Documented as upgrade path |
+| Approach              | Trade-off                                                  | Verdict                    |
+| --------------------- | ---------------------------------------------------------- | -------------------------- |
+| Render free, Docker   | Real server, writes work; sleeps after ~15 min idle        | **Picked**                 |
+| Vercel + `vercel-php` | Free, but read-only disk, SQLite writes and sessions flaky | Rejected                   |
+| Laravel Cloud         | Best Laravel fit, but paid after a 14-day credit           | Documented as upgrade path |
 
 Data portability: commit migrations, factories and seeders, never the DB.
 Seeding uses a fixed Faker seed and dates relative to "today", so every
@@ -50,6 +53,7 @@ clone and every Render boot produces identical, current-looking data.
 `users` (+ `is_admin` bool). Gate `view-analytics` → `is_admin`.
 
 `visits` — one row per session
+
 - `session_uuid` uuid unique, `landing_page` string, `source` TrafficSource
   (direct, organic, social, referral, email), `referrer_host` nullable,
   `device` Device (desktop, mobile, tablet), `country_code` char(2),
@@ -57,6 +61,7 @@ clone and every Render boot produces identical, current-looking data.
   `started_at` datetime (indexed).
 
 `vet_searches`
+
 - `visit_id` FK nullable (null on delete), `search_type` SearchType
   (place, location), `query` nullable (null for location searches),
   `country_code`, `results_count`, `latency_ms`, `status` SearchStatus
@@ -67,6 +72,7 @@ clone and every Render boot produces identical, current-looking data.
 `clinics` — `name`, `city`, `country_code`, `lat`, `lon`, `phone` nullable.
 
 `clinic_leads` — a visitor clicked "Open in Maps" or "Call" on a clinic card
+
 - `clinic_id` FK cascade, `vet_search_id` FK nullable, `action` LeadAction
   (directions, call), `status` LeadStatus (new, contacted, converted, lost),
   `occurred_at` datetime (indexed).

@@ -9,9 +9,14 @@
 
 @theme inline {
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-heading:
+        'Fredoka', ui-rounded, 'SF Pro Rounded', 'Inter', sans-serif;
+
+    --color-good: var(--good);
+    --color-pine: var(--pine);
+    --color-pine-foreground: var(--pine-foreground);
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -62,74 +67,95 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.87 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+    /* Plug N Paw brand, carried over from the public website. */
+    --background: oklch(0.981 0.008 72); /* paper */
+    --foreground: oklch(0.22 0.022 48); /* ink */
+    --card: oklch(0.995 0.004 72);
+    --card-foreground: oklch(0.22 0.022 48);
+    --popover: oklch(0.995 0.004 72);
+    --popover-foreground: oklch(0.22 0.022 48);
+    --primary: oklch(0.58 0.19 32); /* pumpkin clay */
+    --primary-foreground: oklch(0.99 0.01 72);
+    --secondary: oklch(0.945 0.014 65);
+    --secondary-foreground: oklch(0.27 0.03 50);
+    --muted: oklch(0.955 0.012 65);
+    --muted-foreground: oklch(0.47 0.028 55);
+    --accent: oklch(0.93 0.035 190); /* mint */
+    --accent-foreground: oklch(0.27 0.05 197);
+    --destructive: oklch(0.53 0.2 25);
+    --destructive-foreground: oklch(0.53 0.2 25);
+    --good: oklch(0.5 0.12 150);
+    --border: oklch(0.9 0.016 60);
+    --input: oklch(0.88 0.018 60);
+    --ring: oklch(0.58 0.19 32);
+    --pine: oklch(0.32 0.05 197);
+    --pine-foreground: oklch(0.96 0.015 190);
+
+    /* Categorical chart hues, fixed order. Validated with the dataviz
+       palette checker against the card surface (all checks pass). */
+    --chart-1: #d33e25;
+    --chart-2: #008c99;
+    --chart-3: #be7c1c;
+    --chart-4: #6b66b4;
+    --chart-5: #4d8c47;
+    /* Reserved for search outcomes, never used as a series colour. */
+    --chart-failed: #a3263c;
+    --chart-neutral: oklch(0.83 0.02 65);
+    --chart-grid: oklch(0.92 0.012 65);
+
+    --radius: 0.75rem;
+    --sidebar: oklch(0.32 0.05 197); /* pine teal frame */
+    --sidebar-foreground: oklch(0.93 0.02 190);
+    --sidebar-primary: oklch(0.67 0.18 32);
+    --sidebar-primary-foreground: oklch(0.99 0.01 72);
+    --sidebar-accent: oklch(0.39 0.055 197);
+    --sidebar-accent-foreground: oklch(0.99 0.008 190);
+    --sidebar-border: oklch(0.4 0.05 197);
+    --sidebar-ring: oklch(0.67 0.18 32);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.145 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.396 0.141 25.723);
-    --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: oklch(0.269 0 0);
-    --input: oklch(0.269 0 0);
-    --ring: oklch(0.439 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.985 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+    --background: oklch(0.17 0.02 50);
+    --foreground: oklch(0.95 0.012 72);
+    --card: oklch(0.225 0.022 55);
+    --card-foreground: oklch(0.95 0.012 72);
+    --popover: oklch(0.225 0.022 55);
+    --popover-foreground: oklch(0.95 0.012 72);
+    --primary: oklch(0.67 0.18 32);
+    --primary-foreground: oklch(0.15 0.02 50);
+    --secondary: oklch(0.27 0.02 55);
+    --secondary-foreground: oklch(0.95 0.012 72);
+    --muted: oklch(0.27 0.02 55);
+    --muted-foreground: oklch(0.74 0.02 65);
+    --accent: oklch(0.33 0.05 195);
+    --accent-foreground: oklch(0.93 0.03 190);
+    --destructive: oklch(0.7 0.18 22);
+    --destructive-foreground: oklch(0.7 0.18 22);
+    --good: oklch(0.74 0.13 150);
+    --border: oklch(1 0.01 70 / 12%);
+    --input: oklch(1 0.01 70 / 16%);
+    --ring: oklch(0.67 0.18 32);
+    --pine: oklch(0.4 0.055 197);
+    --pine-foreground: oklch(0.96 0.015 190);
+
+    /* Dark steps of the same hues, validated against the dark card. */
+    --chart-1: #e05c45;
+    --chart-2: #0099a0;
+    --chart-3: #c48225;
+    --chart-4: #7f79d1;
+    --chart-5: #5aa053;
+    --chart-failed: #e0566d;
+    --chart-neutral: oklch(0.45 0.02 60);
+    --chart-grid: oklch(1 0.01 70 / 8%);
+
+    --sidebar: oklch(0.22 0.035 197);
+    --sidebar-foreground: oklch(0.9 0.02 190);
+    --sidebar-primary: oklch(0.67 0.18 32);
+    --sidebar-primary-foreground: oklch(0.99 0.01 72);
+    --sidebar-accent: oklch(0.29 0.045 197);
+    --sidebar-accent-foreground: oklch(0.99 0.008 190);
+    --sidebar-border: oklch(0.3 0.04 197);
+    --sidebar-ring: oklch(0.67 0.18 32);
 }
 
 @layer base {
@@ -139,5 +165,26 @@
 
     body {
         @apply bg-background text-foreground;
+        font-feature-settings: 'cv11', 'ss01';
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-heading);
+        letter-spacing: -0.005em;
+    }
+}
+
+@utility font-heading {
+    font-family: var(--font-heading);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
     }
 }

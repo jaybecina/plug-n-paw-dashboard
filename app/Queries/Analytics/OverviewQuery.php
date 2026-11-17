@@ -8,6 +8,7 @@ use App\Enums\SearchStatus;
 use App\Enums\TrafficSource;
 use App\Support\DateRange;
 use App\Support\Kpi;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -61,7 +62,7 @@ final class OverviewQuery
                     'action' => LeadAction::from($row->action)->label(),
                     'status' => $row->status,
                     'statusLabel' => LeadStatus::from($row->status)->label(),
-                    'occurredAt' => $row->occurred_at,
+                    'occurredAt' => CarbonImmutable::parse($row->occurred_at)->toIso8601String(),
                 ])
                 ->all(),
         ];
