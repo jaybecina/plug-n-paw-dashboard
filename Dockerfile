@@ -6,7 +6,11 @@
 FROM dunglas/frankenphp:1-php8.4 AS base
 
 RUN install-php-extensions intl zip opcache pcntl \
-    && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+    && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    # The image grants frankenphp cap_net_bind_service (ports 80/443). Hosts
+    # like Render don't grant that capability, so exec fails with "Operation
+    # not permitted". We listen on a high port ($PORT), so drop it.
+    && setcap -r /usr/local/bin/frankenphp
 
 COPY docker/php.ini "$PHP_INI_DIR/conf.d/zz-app.ini"
 
