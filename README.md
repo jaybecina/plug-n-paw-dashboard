@@ -29,7 +29,7 @@ Every page has a **7 / 30 / 90 day** filter and compares against the period just
 
 ## Quick start
 
-You need **PHP 8.3+**, **Composer** and **Node 22+**. Nothing else: the database is a SQLite file.
+You need **PHP 8.4+**, **Composer** and **Node 22+**. Nothing else: the database is a SQLite file.
 
 ```bash
 git clone https://github.com/jaybecina/plug-n-paw-dashboard.git
@@ -95,7 +95,7 @@ composer test       # Pint (style) + Larastan level 7 + Pest
 composer ci:check   # the above + frontend lint/format + vue-tsc
 ```
 
-The suite has 84 Pest tests. They cover the auth and admin gate, demo mode, every page's props, empty databases, invalid filters, lead updates, CSV export (including formula injection), date-range maths, and seeding determinism. GitHub Actions runs them on PHP 8.3 and 8.4, then builds the production Docker image and boots it.
+The suite has 85 Pest tests. They cover the auth and admin gate, demo mode, every page's props, empty databases, invalid filters, lead updates, CSV export (including formula injection), date-range maths, and seeding determinism. GitHub Actions runs them on PHP 8.4 and 8.5, then builds the production Docker image and boots it.
 
 ## Deploy for free (Render)
 
