@@ -142,10 +142,13 @@ class DemoDataSeeder extends Seeder
 
     /**
      * Gentle growth, a weekend lift, day-to-day noise and the odd viral post.
+     *
+     * Sized for a small, unmarketed side project: roughly 250 visits a month
+     * at the start of the window growing to under 500 by today.
      */
     private function visitsFor(CarbonImmutable $day, int $daysAgo, bool $isSpike): int
     {
-        $growth = 90 + (self::DAYS - $daysAgo) * 0.6;
+        $growth = 8 + (self::DAYS - $daysAgo) * 0.035;
         $weekday = match ($day->dayOfWeekIso) {
             6, 7 => 1.22,
             1 => 1.08,
@@ -153,7 +156,7 @@ class DemoDataSeeder extends Seeder
         };
         $noise = $this->float(0.85, 1.15);
 
-        return (int) round($growth * $weekday * $noise * ($isSpike ? 2.4 : 1));
+        return (int) round($growth * $weekday * $noise * ($isSpike ? 2.2 : 1));
     }
 
     /**

@@ -49,7 +49,7 @@ php artisan demo:seed        # wipe and rebuild the demo database (asks first in
 php artisan demo:seed --force
 ```
 
-The seeder produces **180 days** of realistic activity (about 28k visits, 18k searches and 3.7k clinic leads). It includes weekly seasonality, growth, three viral social posts and one map-provider outage. It's **deterministic**: it uses a private seeded random engine, and dates are relative to _today_. Everyone who clones the repo sees exactly the same numbers, and the charts never look stale.
+The seeder produces **180 days** of realistic activity (about 2.2k visits, 1.4k searches and 250 clinic leads, or under 500 visits a month, like a small site with no marketing). It includes weekly seasonality, growth, three viral social posts and one map-provider outage. It's **deterministic**: it uses a private seeded random engine, and dates are relative to _today_. Everyone who clones the repo sees exactly the same numbers, and the charts never look stale.
 
 ## Authentication
 
