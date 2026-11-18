@@ -6,7 +6,7 @@ The analytics back office for **[Plug N Paw](https://plug-n-paw-web.vercel.app)*
 
 Built with **Laravel 13, Inertia 3, Vue 3 (TypeScript) and SQLite**.
 
-**Live demo:** https://plug-n-paw-admin.onrender.com. The login is filled in for you. It runs on a free server, so the first load can take about 30 seconds.
+**Live demo:** https://plug-n-paw-admin.onrender.com. It runs on a free server, so the first load can take about 30 seconds.
 
 ![Overview page](docs/screenshots/overview-light.png)
 
@@ -38,7 +38,7 @@ composer setup   # installs, creates .env + database/database.sqlite, migrates, 
 composer dev     # app on http://localhost:8000 with Vite hot reload
 ```
 
-Log in with **admin@plugnpaw.test** / **password**.
+Log in with **admin@admin.com** / **password123** (the local defaults from `.env.example`).
 
 ### Demo data: what a clone gets
 
@@ -57,7 +57,7 @@ The seeder produces **180 days** of realistic activity (about 28k visits, 18k se
 - **Sign-up is turned off.** Only seeded admins can get in, and every analytics route checks a `view-analytics` gate.
 - **Admin account:** set by `ADMIN_EMAIL`, `ADMIN_PASSWORD` and `ADMIN_NAME` in `.env`, created by `AdminUserSeeder`.
 - **Reset emails** use `MAIL_MAILER=log`. Open the reset link from `storage/logs/laravel.log`.
-- **Demo mode** (`DEMO_MODE=true`, used on the public deployment) shows the credentials on the login page. It also refuses password, profile, 2FA, passkey and delete-account changes, so one visitor can't lock out the next.
+- **Demo mode** (`DEMO_MODE=true`, used on the public deployment) refuses password, profile, 2FA, passkey and delete-account changes, so one visitor can't lock out the next.
 
 ## How it's built
 
@@ -103,7 +103,7 @@ The repo includes a `Dockerfile` (FrankenPHP, PHP 8.4) and a `render.yaml` Bluep
 
 1. Push to GitHub.
 2. In [Render](https://render.com), go to **New → Blueprint** and pick this repo. The free plan needs no credit card.
-3. That's it. Render generates `APP_KEY` and provides the public URL.
+3. Render generates `APP_KEY` and provides the public URL. It asks for one value, `ADMIN_PASSWORD`: type the password you want for the admin login. It's kept in Render, not in this public repo.
 
 On every boot the container caches config, routes and views, runs `demo:seed --force` for a fresh demo database, and serves on Render's port. Free instances sleep after about 15 idle minutes, so the next visit takes roughly 30 seconds to wake. That's fine for a portfolio, and every visitor gets clean data.
 

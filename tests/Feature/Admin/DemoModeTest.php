@@ -50,19 +50,13 @@ it('allows the same changes when demo mode is off', function () {
     expect($this->admin->fresh()->name)->toBe('Renamed');
 });
 
-it('shows the demo credentials on the login page', function () {
-    $this->get(route('login'))->assertInertia(fn (Assert $page) => $page
-        ->component('auth/Login')
-        ->where('demo.email', config('demo.admin.email'))
-        ->where('demo.password', config('demo.admin.password'))
-    );
-});
-
-it('hides the credentials when demo mode is off', function () {
-    config(['demo.enabled' => false]);
+it('never exposes the admin credentials on the login page', function (bool $demo) {
+    config(['demo.enabled' => $demo]);
 
     $this->get(route('login'))->assertInertia(fn (Assert $page) => $page
         ->component('auth/Login')
-        ->where('demo', null)
+        ->missing('demo')
     );
-});
+
+    expect(config('demo.admin.email'))->toBe('admin@admin.com');
+})->with([true, false]);

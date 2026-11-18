@@ -1,6 +1,6 @@
 # Render Blueprint: https://render.com/docs/blueprint-spec
-# New → Blueprint → pick this repo. Nothing else to configure: Render
-# generates APP_KEY and provides the public URL.
+# New → Blueprint → pick this repo. Render generates APP_KEY and provides the
+# public URL; you only type the admin password when prompted.
 services:
     - type: web
       name: plug-n-paw-admin
@@ -19,6 +19,8 @@ services:
           - key: DEMO_MODE
             value: 'true'
           - key: ADMIN_EMAIL
-            value: admin@plugnpaw.test
+            value: admin@admin.com
+          # Not stored in this public repo: Render asks for it when you apply
+          # the Blueprint.
           - key: ADMIN_PASSWORD
-            value: password
+            sync: false
